@@ -21,12 +21,12 @@ def parce_vs():
     if not os.path.exists("data"):
         os.mkdir("data")
 
-    with open("data/mist.json", "w", encoding="utf-8") as file:
+    with open("VS/data/mist.json", "w", encoding="utf-8") as file:
       json.dump(data, file, indent=4, ensure_ascii=False)
 
     domen = "https://www.victoriassecret.com/"
     dict_all = {}
-    with open("data/mist.json") as mists:
+    with open("VS/data/mist.json") as mists:
         data = json.load(mists)
 
         for el in data['stacks']:
@@ -90,16 +90,7 @@ def parce_vs():
                         dict_all[item['id']]["min_price"] = min_price
 
 
-
-
-
-
-
-
-
-
-
-    with open("data/mist_sale.json", "w", encoding="utf-8") as file:
+    with open("VS/data/mist_sale.json", "w", encoding="utf-8") as file:
         json.dump(dict_all, file, indent=4, ensure_ascii=False)
 
 
