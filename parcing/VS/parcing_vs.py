@@ -3,6 +3,9 @@ import requests
 import os
 from fake_useragent import UserAgent
 import json
+import vs_config
+
+
 # from bs4 import BeautifulSoup
 # from selenium import webdriver
 # from webdriver_manager.chrome import ChromeDriverManager
@@ -11,26 +14,34 @@ import json
 
 def parce_vs():
 
-    url = "https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=beefafbf-2e8c-4bcd-b5ff-ae896ff171d7&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=3c38b9a7-e9be-4d47-a699-b0e0f03bfd37.34_0&screenWidth=1920&screenHeight=1080"
+    for key, val in vs_config.dict_url.items():
+        get_data(val, key)
+
+
+
+
+def get_data(url, filename):
+
     headers = {"user-agent": UserAgent().chrome
                }
-
-    response = requests.get(url=url, headers=headers)    # # print(response.json())
+    response = requests.session().get(url=url, headers=headers)  # # print(response.json())
     data = response.json()
 
     if not os.path.exists("data"):
         os.mkdir("data")
 
-    with open("VS/data/mist.json", "w", encoding="utf-8") as file:
-      json.dump(data, file, indent=4, ensure_ascii=False)
+    with open("VS/data/"+filename+".json", "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
 
     domen = "https://www.victoriassecret.com/"
     dict_all = {}
-    with open("VS/data/mist.json") as mists:
+    count = 0
+    with open("VS/data/"+filename+".json") as mists:
         data = json.load(mists)
 
         for el in data['stacks']:
             for item in el["list"]:
+                count += 1
                 if item['salePrice'] or not item['altPrices'] == None:
                     dict_all[item['id']] = {
                         "name": item['name'],
@@ -46,7 +57,6 @@ def parce_vs():
                     if not item['altPrices'] == None:
                         for price in item['altPrices']:
                             alt_price = price.split("/$")
-                            print(alt_price)
 
                             try:
                                 quant_1 = alt_price[0][-1]
@@ -89,11 +99,10 @@ def parce_vs():
                                         dict_all[item['id']]["special_price_1"]["price"])
                         dict_all[item['id']]["min_price"] = min_price
 
-
-    with open("VS/data/mist_sale.json", "w", encoding="utf-8") as file:
+    with open("VS/data/"+filename+"_sale.json", "w", encoding="utf-8") as file:
         json.dump(dict_all, file, indent=4, ensure_ascii=False)
+        print(f'Total items in {filename} {count}')
 
 
-#
 if __name__ == "__main__":
     parce_vs()
