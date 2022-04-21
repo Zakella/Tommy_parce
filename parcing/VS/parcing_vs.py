@@ -1,4 +1,3 @@
-# import sys
 import requests
 import os
 from fake_useragent import UserAgent
@@ -6,37 +5,33 @@ import json
 import vs_config
 
 
-# from bs4 import BeautifulSoup
-# from selenium import webdriver
-# from webdriver_manager.chrome import ChromeDriverManager
-# from requests_html import HTMLSession
-
-
 def parce_vs():
 
+
     for key, val in vs_config.dict_url.items():
-        get_data(val, key)
+          get_data(val, key)
 
 
 
 
-def get_data(url, filename):
+def get_data(val, key):
 
     headers = {"user-agent": UserAgent().chrome
                }
+    url = val["url"]
     response = requests.session().get(url=url, headers=headers)  # # print(response.json())
     data = response.json()
 
     if not os.path.exists("data"):
         os.mkdir("data")
 
-    with open("VS/data/"+filename+".json", "w", encoding="utf-8") as file:
+    with open("VS/data/"+key+".json", "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
     domen = "https://www.victoriassecret.com/"
     dict_all = {}
     count = 0
-    with open("VS/data/"+filename+".json") as mists:
+    with open("VS/data/"+key+".json") as mists:
         data = json.load(mists)
 
         for el in data['stacks']:
@@ -71,10 +66,7 @@ def get_data(url, filename):
 
                             try:
                                 quant_2 = alt_price[-2].replace(",", "")[-1]
-                                print(quant_2)
                                 amount_2 = alt_price[-1]
-                                print(amount_2)
-                                # print(quant_2, amount_2)
                                 dict_all[item['id']]["special_price_2"] = {
                                     "amount": float(amount_2),
                                     "quant": float(quant_2),
@@ -99,9 +91,9 @@ def get_data(url, filename):
                                         dict_all[item['id']]["special_price_1"]["price"])
                         dict_all[item['id']]["min_price"] = min_price
 
-    with open("VS/data/"+filename+"_sale.json", "w", encoding="utf-8") as file:
+    with open("VS/data/"+key+"_sale.json", "w", encoding="utf-8") as file:
         json.dump(dict_all, file, indent=4, ensure_ascii=False)
-        print(f'Total items in {filename} {count}')
+        print(f'Total items in {key} {count}')
 
 
 if __name__ == "__main__":
