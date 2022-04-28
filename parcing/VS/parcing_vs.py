@@ -6,16 +6,11 @@ import vs_config
 
 
 def parce_vs():
-
-
     for key, val in vs_config.dict_url.items():
-          get_data(val, key)
-
-
+        get_data(val, key)
 
 
 def get_data(val, key):
-
     headers = {"user-agent": UserAgent().chrome
                }
     url = val["url"]
@@ -25,19 +20,26 @@ def get_data(val, key):
     if not os.path.exists("data"):
         os.mkdir("data")
 
-    with open("VS/data/"+key+".json", "w", encoding="utf-8") as file:
+    with open( key + ".json", "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
     domen = "https://www.victoriassecret.com/"
     dict_all = {}
     count = 0
-    with open("VS/data/"+key+".json") as mists:
+    with open( key + ".json") as mists:
         data = json.load(mists)
+        # print(data)
 
         for el in data['stacks']:
             for item in el["list"]:
                 count += 1
                 if item['salePrice'] or not item['altPrices'] == None:
+
+                    if not item['productImages']:
+                        pict_ref = ""
+                    else:
+                        pict_ref = item['productImages']
+
                     dict_all[item['id']] = {
                         "name": item['name'],
                         "price": item['price'],
@@ -47,6 +49,7 @@ def get_data(val, key):
                         "collectionShortDescription": item['collectionShortDescription'],
                         "special_price_1": None,
                         "special_price_2": None,
+                        "pict_ref": pict_ref,
                         "min_price": float(item['price'].split("$")[1])
                     }
                     if not item['altPrices'] == None:
@@ -91,7 +94,7 @@ def get_data(val, key):
                                         dict_all[item['id']]["special_price_1"]["price"])
                         dict_all[item['id']]["min_price"] = min_price
 
-    with open("VS/data/"+key+"_sale.json", "w", encoding="utf-8") as file:
+    with open( key + "_sale.json", "w", encoding="utf-8") as file:
         json.dump(dict_all, file, indent=4, ensure_ascii=False)
         print(f'Total items in {key} {count}')
 
