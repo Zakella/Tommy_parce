@@ -10,24 +10,23 @@ def parce_vs():
         get_data(val, key)
 
 
-def get_data(val, key):
+def get_data(url, key):
     headers = {"user-agent": UserAgent().chrome
                }
-    url = val["url"]
+    # url = val["url"]
+    "3df29d38-2a70-48ad-8a84-a2ebd4cdec48"
     response = requests.session().get(url=url, headers=headers)  # # print(response.json())
-    data = response.json()
+    if response.status_code == 200:
+        data = response.json()
+        domen = "https://www.victoriassecret.com/"
+        dict_all = {}
+        count = 0
 
-    if not os.path.exists("data"):
-        os.mkdir("data")
+        with open( "response.json", "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)
 
-    with open( key + ".json", "w", encoding="utf-8") as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
-
-    domen = "https://www.victoriassecret.com/"
-    dict_all = {}
-    count = 0
-    with open( key + ".json") as mists:
-        data = json.load(mists)
+        with open("response.json") as file:
+            data = json.load(file)
         # print(data)
 
         for el in data['stacks']:
@@ -39,7 +38,6 @@ def get_data(val, key):
                         pict_ref = ""
                     else:
                         pict_ref = item['productImages']
-
                     dict_all[item['id']] = {
                         "name": item['name'],
                         "price": item['price'],
@@ -94,10 +92,33 @@ def get_data(val, key):
                                         dict_all[item['id']]["special_price_1"]["price"])
                         dict_all[item['id']]["min_price"] = min_price
 
-    with open( key + "_sale.json", "w", encoding="utf-8") as file:
-        json.dump(dict_all, file, indent=4, ensure_ascii=False)
         print(f'Total items in {key} {count}')
+        return dict_all
+
+    #
+    # with open("response.json", "w", encoding="utf-8") as file:
+    #     json.dump(data, file, indent=4, ensure_ascii=False)
+
+    # if not os.path.exists("data"):
+    #     os.mkdir("data")
+    #
+    # with open( key + ".json", "w", encoding="utf-8") as file:
+    #     json.dump(data, file, indent=4, ensure_ascii=False)
 
 
-if __name__ == "__main__":
-    parce_vs()
+    # if item["id"] == "1e37ad14-9ea6-4ef7-ba7d-39545793f6c8":
+    # print("!!")
+    # if not item['altPrices'] == None:
+
+
+# with open( key + "_sale.json", "w", encoding="utf-8") as file:
+#     json.dump(dict_all, file, indent=4, ensure_ascii=False)
+#     print(f'Total items in {key} {count}')
+
+
+# if __name__ == "__main__":
+#     url = vs_config.dict_url["panties"]["url"]
+#     data = get_data(url, "panties")
+#     # with open("mist.json", "w") as file:
+#     #     json.dump(data, file, indent=4, ensure_ascii=False)
+#     # parce_vs()

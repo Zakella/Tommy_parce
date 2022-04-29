@@ -11,6 +11,7 @@ import parcing_vs
 
 bot = Bot(token=token, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
+pict_domain = "https://www.victoriassecret.com/p/280x373/"
 
 
 @dp.message_handler(commands="start")
@@ -24,81 +25,81 @@ async def start(message: types.Message):
 @dp.message_handler(Text(equals="Cleareance"))
 async def get_cleareance(message: types.Message):
     await message.answer("Please waiting...")
-    with open("cleareance_sale.json") as file:
+    time.sleep(5)
+    url = vs_config.dict_url["cleareance"]["url"]
+    data = parcing_vs.get_data(url, "cleareance")
+    if not data:
+        await message.answer("No items ...")
+        return
 
-        # "https://www.victoriassecret.com/p/280x373/tif/b6/a0/b6a0ab7c765c434bb412c35076e77134/112005234YLO_OM_F.jpg"
-        # "https://www.victoriassecret.com/p/280x373/tif/51/2d/512d2ca46e3249a1ba5482704b3b2b50/111300385CYU_OM_F.jpg"
+    for item in data:
+        url = data[item]["url"]
+        price = data[item]["price"]
+        title = data[item]["name"]
+        sale_price = data[item]["min_price"]
+        pict_link = "".join(data[item]["pict_ref"]) + ".jpg"
+        if sale_price <= vs_config.dict_url["cleareance"]["min_price"]:
+            card = f"{hlink(title, url)}\n" \
+                   f"{hbold('Категория: ')} Cleareance\n" \
+                   f"{hbold('Цена: ')} {price}\n" \
+                   f"{hbold('Прайс со скидкой: ')} - {sale_price}"
+            await message.answer_photo(pict_domain + pict_link, card)
+            time.sleep(0.2)
 
-        pict_link = "https://www.victoriassecret.com//p/280x373/tif/51/2d/512d2ca46e3249a1ba5482704b3b2b50/111300385CYU_OM_F"
-        pict_domain = "https://www.victoriassecret.com/p/280x373/"
-        data = json.load(file)
-        for item in data:
-            url = data[item]["url"]
-            price = data[item]["price"]
-            title = data[item]["name"]
-            sale_price = data[item]["min_price"]
-            pict_link = "".join(data[item]["pict_ref"] ) + ".jpg"
-            if sale_price <= 10:
-                card = f"{hlink(title, url)}\n" \
-                       f"{hbold('Категория: ')} Cleareance\n" \
-                       f"{hbold('Цена: ')} {price}\n" \
-                       f"{hbold('Прайс со скидкой: ')} - {sale_price}"
 
-                # await message.answer(card)
-                # print(pict_domain + pict_link, card)
-                await message.answer_photo(pict_domain + pict_link, card)
-                # time.sleep(2)
-                # break
+@dp.message_handler(Text(equals="Beauty"))
+async def get_cleareance(message: types.Message):
+    await message.answer("Please waiting...")
+    time.sleep(5)
+    url = vs_config.dict_url["beauty"]["url"]
+    data = parcing_vs.get_data(url, "beauty")
+    if not data:
+        await message.answer("No items ...")
+        return
 
-            # print(item["url"])
-            # # print(item.get("url"))
-            # card = f'{hlink(title, url)}\n'\
-            # f'{hbold('Категория')} Cleareance\n'
+    for item in data:
+        url = data[item]["url"]
+        price = data[item]["price"]
+        title = data[item]["name"]
+        sale_price = data[item]["min_price"]
+        pict_link = "".join(data[item]["pict_ref"]) + ".jpg"
+        if sale_price <= vs_config.dict_url["beauty"]["min_price"]:
+            card = f"{hlink(title, url)}\n" \
+                   f"{hbold('Категория: ')} Beauty\n" \
+                   f"{hbold('Цена: ')} {price}\n" \
+                   f"{hbold('Прайс со скидкой: ')} - {sale_price}"
+            await message.answer_photo(pict_domain + pict_link, card)
+            time.sleep(0.2)
+
+
+@dp.message_handler(Text(equals="Panties"))
+async def get_cleareance(message: types.Message):
+    await message.answer("Please waiting...")
+    time.sleep(5)
+    url = vs_config.dict_url["panties"]["url"]
+    data = parcing_vs.get_data(url, "panties")
+    if not data:
+        await message.answer("No items ...")
+        return
+
+    for item in data:
+        url = data[item]["url"]
+        price = data[item]["price"]
+        title = data[item]["name"]
+        sale_price = data[item]["min_price"]
+        pict_link = "".join(data[item]["pict_ref"]) + ".jpg"
+        if sale_price <= vs_config.dict_url["panties"]["min_price"]:
+            card = f"{hlink(title, url)}\n" \
+                   f"{hbold('Категория: ')} Panties\n" \
+                   f"{hbold('Цена: ')} {price}\n" \
+                   f"{hbold('Прайс со скидкой: ')} - {sale_price}"
+            await message.answer_photo(pict_domain + pict_link, card)
+            time.sleep(1)
 
 
 def main():
     executor.start_polling(dp)
 
 
-# def post_sales(data):
-#     url = "https://api.telegram.org/bot"
-#     for el in data:
-#         print(data[el]["url"])
-#         if data[el]["min_price"] < 10:
-#             res = requests.get(
-#                 "https://api.telegram.org/bot5322880379:AAHZeHrcSRoQtOekGdNJFlWc4UuZZe-lh3U/sendMessage?chat_id=-1001648134992&text=" +
-#                 data[el]["url"])
-#             time.sleep(5)
-#
-#         # for i in el:
-#         #     print(i)
-#         # print(el["url"])
-#
-#         # url = el[]
-#     #
-#     # channel_id = "1001648134992"
-#     # url += token
-#     #
-#     # method = url + "/sendMessage"
-#     #
-#     # a = requests.get("https://api.telegram.org/bot5322880379:AAHZeHrcSRoQtOekGdNJFlWc4UuZZe-lh3U/getupdates")
-#     # print(a.text)
-#     #
-# res = requests.get(
-#     "https://api.telegram.org/bot5322880379:AAHZeHrcSRoQtOekGdNJFlWc4UuZZe-lh3U/sendMessage?chat_id=-1001648134992&text=test!")
-# print(res.text)
-
-# r = requests.post(method, data={
-#     "chat_id": channel_id,
-#     "text": "Hi Maria!"
-# })
-#
-# if r.status_code != 200:
-#     raise Exception("post_text")
-
-
 if __name__ == "__main__":
     main()
-    # with open("cleareance_sale.json") as mists:
-    #     data = json.load(mists)
-    #     post_sales(data)
