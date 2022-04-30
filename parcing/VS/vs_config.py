@@ -15,20 +15,22 @@ dict_url["panties"] = {
              ["Fine Fragrance Mist", 'Rollerball']}
 }
 #
-# dict_url["lingerie"] = {
-#     "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=6585a80a-8cee-4a6d-8fff-a46ded641f91&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
-#     "keywords":
-#         {12:
-#              ["Fine Fragrance Mist", 'Rollerball']}
-# }
+dict_url["lingerie"] = {
+    "url": "https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=6585a80a-8cee-4a6d-8fff-a46ded641f91&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
+    "min_price": 15.00,
+    "keywords":
+        {12:
+             ["Fine Fragrance Mist", 'Rollerball']}
+}
 #
 #
-# dict_url["sleep"] = {
-#     "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=eb774b01-fbdd-4c55-a9a2-8a3928c7b821&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
-#     "keywords":
-#         {12:
-#              ["Fine Fragrance Mist", 'Rollerball']}
-# }
+dict_url["sleep"] = {
+    "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=eb774b01-fbdd-4c55-a9a2-8a3928c7b821&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
+    "min_price": 5000.00,
+    "keywords":
+        {12:
+             ["Fine Fragrance Mist", 'Rollerball']}
+}
 #
 # dict_url["swimsuits"] = {
 #     "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=b38f88cf-550b-43ac-9c49-97e6c2688189&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",

@@ -10,115 +10,79 @@ def parce_vs():
         get_data(val, key)
 
 
-def get_data(url, key):
+def get_data(cat_name, url):
     headers = {"user-agent": UserAgent().chrome
                }
-    # url = val["url"]
-    "3df29d38-2a70-48ad-8a84-a2ebd4cdec48"
-    response = requests.session().get(url=url, headers=headers)  # # print(response.json())
+
+    response = requests.session().get(url=url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        domen = "https://www.victoriassecret.com/"
-        dict_all = {}
-        count = 0
-
-        with open( "response.json", "w", encoding="utf-8") as file:
+        with open("response.json", "w", encoding="utf-8") as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
-
-        with open("response.json") as file:
+    else:
+        with open("response.json", "r", encoding="utf-8") as file:
             data = json.load(file)
-        # print(data)
 
-        for el in data['stacks']:
-            for item in el["list"]:
-                count += 1
-                if item['salePrice'] or not item['altPrices'] == None:
+    items_list = []
+    stacks = data.get("stacks")
+    domen = "https://www.victoriassecret.com/"
+    pict_domain = "https://www.victoriassecret.com/p/280x373/"
+    counter = 0
+    for item in stacks:
+        for list_item in item.get("list"):
+            item_card = {}
+            name = list_item.get("name")
+            family = list_item.get("family")
+            item_card["name"] = f" {family} {name}"
+            item_card["family"] = family
+            item_card["url"] = domen + list_item.get("url")
+            item_card["price"] = float(list_item.get("price").replace("$", ""))
+            sale_price = list_item.get("salePrice").replace("$", "")
+            item_card["images"] = []
+            if not sale_price:
+                item_card["sale_price"] = 0
+            else:
+                item_card["sale_price"] = float(sale_price)
+            item_card["altPrices"] = list_item.get("altPrices")
+            item_card["min_price"] = item_card["price"] if not item_card["sale_price"] else item_card[
+                "sale_price"]
+            item_card["alt_price1"] = 0
+            item_card["alt_price2"] = 0
+            if item_card["altPrices"] != None:
+                for price in item_card['altPrices']:
+                    alt_price = price.split("/$")
+                    try:
+                        quant_1 = float(alt_price[0][-1])
+                        amount_1 = float(alt_price[1].split()[0].replace(",", ""))
+                        item_card["alt_price1"] = amount_1 / quant_1 if quant_1 != 0 else 0
+                    except Exception:
+                        pass
 
-                    if not item['productImages']:
-                        pict_ref = ""
-                    else:
-                        pict_ref = item['productImages']
-                    dict_all[item['id']] = {
-                        "name": item['name'],
-                        "price": item['price'],
-                        "url": domen + item['url'],
-                        "altPrices": item['altPrices'],
-                        "salePrice": item['salePrice'],
-                        "collectionShortDescription": item['collectionShortDescription'],
-                        "special_price_1": None,
-                        "special_price_2": None,
-                        "pict_ref": pict_ref,
-                        "min_price": float(item['price'].split("$")[1])
-                    }
-                    if not item['altPrices'] == None:
-                        for price in item['altPrices']:
-                            alt_price = price.split("/$")
+                try:
+                    quant_2 = alt_price[-2].replace(",", "")[-1]
+                    amount_2 = alt_price[-1]
+                    item_card["alt_price2"] = amount_2 / quant_2 if quant_2 != 0 else 0
+                except Exception:
+                    pass
 
-                            try:
-                                quant_1 = alt_price[0][-1]
-                                amount_1 = alt_price[1].split()[0].replace(",", "")
-                                dict_all[item['id']]["special_price_1"] = {
-                                    "amount": float(amount_1),
-                                    "quant": float(quant_1),
-                                    "price": float(amount_1) / float(quant_1)
-                                }
-                            except Exception:
-                                pass
+            item_card["min_price"] = min(
+                filter(None, (item_card["min_price"], item_card["alt_price1"], item_card["alt_price2"])))
 
-                            try:
-                                quant_2 = alt_price[-2].replace(",", "")[-1]
-                                amount_2 = alt_price[-1]
-                                dict_all[item['id']]["special_price_2"] = {
-                                    "amount": float(amount_2),
-                                    "quant": float(quant_2),
-                                    "price": float(amount_2) / float(quant_2)
-                                }
+            for image in list_item.get("swatches"):
+                try:
+                    item_card["images"].append(pict_domain + image.get("productImage") + ".jpg")
+                except:
+                    item_card["images"].append(pict_domain + list_item.get("productImages")[0] + ".jpg")
 
-                            except Exception:
-                                pass
-                    else:
-                        dict_all[item['id']]["special_price_1"] = {
-                            "amount": float(dict_all[item['id']]["salePrice"].split("$")[-1]),
-                            "quant": 1,
-                            "price": float(dict_all[item['id']]["salePrice"].split("$")[-1]),
-
-                        }
-                    if dict_all[item['id']]["special_price_2"] == None:
-                        min_price = min(dict_all[item['id']]["min_price"],
-                                        dict_all[item['id']]["special_price_1"]["price"])
-                        dict_all[item['id']]["min_price"] = min_price
-                    else:
-                        min_price = min(dict_all[item['id']]["special_price_2"]["price"],
-                                        dict_all[item['id']]["special_price_1"]["price"])
-                        dict_all[item['id']]["min_price"] = min_price
-
-        print(f'Total items in {key} {count}')
-        return dict_all
-
-    #
-    # with open("response.json", "w", encoding="utf-8") as file:
-    #     json.dump(data, file, indent=4, ensure_ascii=False)
-
-    # if not os.path.exists("data"):
-    #     os.mkdir("data")
-    #
-    # with open( key + ".json", "w", encoding="utf-8") as file:
-    #     json.dump(data, file, indent=4, ensure_ascii=False)
-
-
-    # if item["id"] == "1e37ad14-9ea6-4ef7-ba7d-39545793f6c8":
-    # print("!!")
-    # if not item['altPrices'] == None:
-
-
-# with open( key + "_sale.json", "w", encoding="utf-8") as file:
-#     json.dump(dict_all, file, indent=4, ensure_ascii=False)
-#     print(f'Total items in {key} {count}')
-
+            items_list.append(item_card)
+            counter += 1
+    print(f"Total in {cat_name} {counter} items")
+    return items_list
 
 # if __name__ == "__main__":
-#     url = vs_config.dict_url["panties"]["url"]
-#     data = get_data(url, "panties")
-#     # with open("mist.json", "w") as file:
-#     #     json.dump(data, file, indent=4, ensure_ascii=False)
-#     # parce_vs()
+#     data = get_data("panties", vs_config.dict_url["panties"]["url"])
+#     # print(data1)
+# with open("test", "w") as file:
+#     json.dump(data1, file, indent=4, ensure_ascii=False)
+# for it in data:
+#     print(it.get("images"))
