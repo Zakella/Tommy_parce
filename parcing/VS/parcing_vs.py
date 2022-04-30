@@ -68,11 +68,17 @@ def get_data(cat_name, url):
             item_card["min_price"] = min(
                 filter(None, (item_card["min_price"], item_card["alt_price1"], item_card["alt_price2"])))
 
+            main_image =  list_item.get("productImages")[0]
             for image in list_item.get("swatches"):
                 try:
-                    item_card["images"].append(pict_domain + image.get("productImage") + ".jpg")
+                    if main_image != image.get("productImage"):
+                        item_card["images"].append(pict_domain + image.get("productImage") + ".jpg")
+
                 except:
                     item_card["images"].append(pict_domain + list_item.get("productImages")[0] + ".jpg")
+
+            item_card["main_image"] = pict_domain + main_image + ".jpg"
+
 
             items_list.append(item_card)
             counter += 1
