@@ -22,12 +22,10 @@ async def start(message: types.Message):
     await message.answer("Sale", reply_markup=keyboard)
 
 
-@dp.message_handler(Text(equals="Cleareance"))
-async def get_cleareance(message: types.Message):
-    await message.answer("Please waiting...")
+async def load_cat(name_cat, message):
     time.sleep(5)
-    url = vs_config.dict_url["cleareance"]["url"]
-    data = parcing_vs.get_data(url, "cleareance")
+    url = vs_config.dict_url[name_cat]["url"]
+    data = parcing_vs.get_data(url, name_cat)
     if not data:
         await message.answer("No items ...")
         return
@@ -38,63 +36,31 @@ async def get_cleareance(message: types.Message):
         title = data[item]["name"]
         sale_price = data[item]["min_price"]
         pict_link = "".join(data[item]["pict_ref"]) + ".jpg"
-        if sale_price <= vs_config.dict_url["cleareance"]["min_price"]:
+        if sale_price <= vs_config.dict_url[name_cat]["min_price"]:
             card = f"{hlink(title, url)}\n" \
-                   f"{hbold('Категория: ')} Cleareance\n" \
+                   f"{hbold('Категория: ')} {name_cat.title()}\n" \
                    f"{hbold('Цена: ')} {price}\n" \
                    f"{hbold('Прайс со скидкой: ')} - {sale_price}"
             await message.answer_photo(pict_domain + pict_link, card)
             time.sleep(0.2)
+
+
+@dp.message_handler(Text(equals="Cleareance"))
+async def get_cleareance(message: types.Message):
+    await message.answer("Please waiting...")
+    await load_cat("cleareance", message)
 
 
 @dp.message_handler(Text(equals="Beauty"))
 async def get_cleareance(message: types.Message):
     await message.answer("Please waiting...")
-    time.sleep(5)
-    url = vs_config.dict_url["beauty"]["url"]
-    data = parcing_vs.get_data(url, "beauty")
-    if not data:
-        await message.answer("No items ...")
-        return
-
-    for item in data:
-        url = data[item]["url"]
-        price = data[item]["price"]
-        title = data[item]["name"]
-        sale_price = data[item]["min_price"]
-        pict_link = "".join(data[item]["pict_ref"]) + ".jpg"
-        if sale_price <= vs_config.dict_url["beauty"]["min_price"]:
-            card = f"{hlink(title, url)}\n" \
-                   f"{hbold('Категория: ')} Beauty\n" \
-                   f"{hbold('Цена: ')} {price}\n" \
-                   f"{hbold('Прайс со скидкой: ')} - {sale_price}"
-            await message.answer_photo(pict_domain + pict_link, card)
-            time.sleep(0.2)
+    await load_cat("beauty", message)
 
 
 @dp.message_handler(Text(equals="Panties"))
 async def get_cleareance(message: types.Message):
     await message.answer("Please waiting...")
-    time.sleep(5)
-    url = vs_config.dict_url["panties"]["url"]
-    data = parcing_vs.get_data(url, "panties")
-    if not data:
-        await message.answer("No items ...")
-        return
-
-    for item in data:
-        url = data[item]["url"]
-        price = data[item]["price"]
-        title = data[item]["name"]
-        sale_price = data[item]["min_price"]
-        pict_link = "".join(data[item]["pict_ref"]) + ".jpg"
-        if sale_price <= vs_config.dict_url["panties"]["min_price"]:
-            card = f"{hlink(title, url)}\n" \
-                   f"{hbold('Категория: ')} Panties\n" \
-                   f"{hbold('Цена: ')} {price}\n" \
-                   f"{hbold('Прайс со скидкой: ')} - {sale_price}"
-            await message.answer_photo(pict_domain + pict_link, card)
-            time.sleep(1)
+    await load_cat("panties", message)
 
 
 def main():
