@@ -1,6 +1,5 @@
 import requests
 from fake_useragent import UserAgent
-import json
 import vs_config
 
 

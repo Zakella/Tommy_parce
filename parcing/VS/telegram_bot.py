@@ -1,11 +1,8 @@
 from vs_config import Bot as token
-import requests
 import time
-import json
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher.filters import Text
 from aiogram.utils.markdown import hbold, hlink
-import json
 import vs_config
 import parcing_vs
 
