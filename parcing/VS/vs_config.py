@@ -32,43 +32,43 @@ dict_url["sleep"] = {
              ["Fine Fragrance Mist", 'Rollerball']}
 }
 #
-# dict_url["swimsuits"] = {
-#     "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=b38f88cf-550b-43ac-9c49-97e6c2688189&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
-#     "keywords":
-#         {12:
-#              ["Fine Fragrance Mist", 'Rollerball']}
-# }
+dict_url["swimsuits"] = {
+    "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=b38f88cf-550b-43ac-9c49-97e6c2688189&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
+    "keywords":
+        {12:
+             ["Fine Fragrance Mist", 'Rollerball']}
+}
+
 #
+dict_url["sport"] = {
+    "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=b26fd147-6fc0-4406-ae07-fe7e48be83bd&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
+    "keywords":
+        {12:
+             ["Fine Fragrance Mist", 'Rollerball']}
+}
+
 #
-# dict_url["sport"] = {
-#     "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=b26fd147-6fc0-4406-ae07-fe7e48be83bd&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
-#     "keywords":
-#         {12:
-#              ["Fine Fragrance Mist", 'Rollerball']}
-# }
+dict_url["accessories"] = {
+    "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=2c5fa682-04f6-44ea-82e1-b90508861e1f&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
+    "keywords":
+        {12:
+             ["Fine Fragrance Mist", 'Rollerball']}
+}
 #
+dict_url["al_brands_we_love"] = {
+    "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=5531819d-7df2-4edb-a494-ea06881acf1f&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
+    "keywords":
+        {12:
+             ["Fine Fragrance Mist", 'Rollerball']}
+}
+
 #
-# dict_url["accessories"] = {
-#     "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=2c5fa682-04f6-44ea-82e1-b90508861e1f&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
-#     "keywords":
-#         {12:
-#              ["Fine Fragrance Mist", 'Rollerball']}
-# }
-#
-# dict_url["al_brands_we_love"] = {
-#     "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=5531819d-7df2-4edb-a494-ea06881acf1f&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
-#     "keywords":
-#         {12:
-#              ["Fine Fragrance Mist", 'Rollerball']}
-# }
-#
-#
-# dict_url["gifts"] = {
-#     "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=f3bcd88b-ca5d-4026-a7c8-81438e5cd056&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
-#     "keywords":
-#         {12:
-#              ["Fine Fragrance Mist", 'Rollerball']}
-# }
+dict_url["gifts"] = {
+    "url":"https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=f3bcd88b-ca5d-4026-a7c8-81438e5cd056&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",
+    "keywords":
+        {12:
+             ["Fine Fragrance Mist", 'Rollerball']}
+}
 
 dict_url["cleareance"] = {
     "url": "https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=091f2401-7b37-42cb-8f74-efc3b6264707&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080",

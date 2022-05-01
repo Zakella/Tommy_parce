@@ -17,7 +17,8 @@ pict_domain = "https://www.victoriassecret.com/p/280x373/"
 @dp.message_handler(commands="start")
 async def start(message: types.Message):
     start_buttons = ["Cleareance", "Beauty", "Panties", "Lingerie",
-                     "Sleep"]
+                     "Sleep", "Swimsuits", "Sport", "Accessories",
+                     "All Brands We love", "Gifts"]
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*start_buttons)
     await message.answer("Sale", reply_markup=keyboard)
@@ -27,6 +28,10 @@ async def load_cat(name_cat, message):
     await message.answer("Please waiting...")
     settings = vs_config.dict_url.get(name_cat)
     data = parcing_vs.get_data(name_cat, settings.get("url"))
+    if not isinstance(data, list):
+        await message.answer(data)
+        return
+
     for item in data:
         title = item.get("name")
         url = item.get("url")
@@ -44,11 +49,10 @@ async def load_cat(name_cat, message):
                 album.attach_photo(photo=image)
             album.attach_photo(photo=item.get("main_image"), caption=card)
             await message.answer_media_group(media=album)
-            time.sleep(1)
+            time.sleep(0.8)
 
         except:
             await message.answer(card)
-
 
 
 @dp.message_handler(Text(equals="Cleareance"))
@@ -57,23 +61,48 @@ async def get_cleareance(message: types.Message):
 
 
 @dp.message_handler(Text(equals="Beauty"))
-async def get_cleareance(message: types.Message):
+async def get_beauty(message: types.Message):
     await load_cat("beauty", message)
 
 
 @dp.message_handler(Text(equals="Panties"))
-async def get_cleareance(message: types.Message):
+async def get_panties(message: types.Message):
     await load_cat("panties", message)
 
 
 @dp.message_handler(Text(equals="Lingerie"))
-async def get_cleareance(message: types.Message):
+async def get_lingerie(message: types.Message):
     await load_cat("lingerie", message)
 
 
+@dp.message_handler(Text(equals="Swimsuits"))
+async def get_swimsuits(message: types.Message):
+    await load_cat("swimsuits", message)
+
+
+@dp.message_handler(Text(equals="Sport"))
+async def get_sport(message: types.Message):
+    await load_cat("sport", message)
+
+
 @dp.message_handler(Text(equals="Sleep"))
-async def get_cleareance(message: types.Message):
+async def get_sleep(message: types.Message):
     await load_cat("sleep", message)
+
+
+@dp.message_handler(Text(equals="Accessories"))
+async def get_accessories(message: types.Message):
+    await load_cat("accessories", message)
+
+
+@dp.message_handler(Text(equals="All Brands We love"))
+async def get_al_brands_we_love(message: types.Message):
+    await load_cat("al_brands_we_love", message)
+
+
+@dp.message_handler(Text(equals="Gifts"))
+async def get_gifts(message: types.Message):
+    await load_cat("gifts", message)
 
 
 def main():
