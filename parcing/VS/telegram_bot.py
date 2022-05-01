@@ -24,16 +24,9 @@ async def start(message: types.Message):
 
 
 async def load_cat(name_cat, message):
-    counter = 0
-    # time.sleep(5)
-    # url = vs_config.dict_url[name_cat]["url"]
-    # data = parcing_vs.get_data(url, name_cat)
-    # if not data:
-    #     await message.answer("No items ...")
-    #     return
+    await message.answer("Please waiting...")
     settings = vs_config.dict_url.get(name_cat)
     data = parcing_vs.get_data(name_cat, settings.get("url"))
-
     for item in data:
         title = item.get("name")
         url = item.get("url")
@@ -45,44 +38,41 @@ async def load_cat(name_cat, message):
                f"{hbold('Family: ')} {family.title()}\n" \
                f"{hbold('Price: ')} {price}\n" \
                f"{hbold('Min. price: ')} - {min_price}"
-        # print(item.get("main_image"))
         album = types.MediaGroup()
-        for image in images:
-            album.attach_photo(photo=image)
-        #     # print(image)
-        # # print(card)
-        album.attach_photo(photo=item.get("main_image"), caption=card)
-        await message.answer_media_group(media=album)
-        time.sleep(1.5)
+        try:
+            for image in images:
+                album.attach_photo(photo=image)
+            album.attach_photo(photo=item.get("main_image"), caption=card)
+            await message.answer_media_group(media=album)
+            time.sleep(1)
+
+        except:
+            await message.answer(card)
+
 
 
 @dp.message_handler(Text(equals="Cleareance"))
 async def get_cleareance(message: types.Message):
-    await message.answer("Please waiting...")
     await load_cat("cleareance", message)
 
 
 @dp.message_handler(Text(equals="Beauty"))
 async def get_cleareance(message: types.Message):
-    await message.answer("Please waiting...")
     await load_cat("beauty", message)
 
 
 @dp.message_handler(Text(equals="Panties"))
 async def get_cleareance(message: types.Message):
-    await message.answer("Please waiting...")
     await load_cat("panties", message)
 
 
 @dp.message_handler(Text(equals="Lingerie"))
 async def get_cleareance(message: types.Message):
-    await message.answer("Please waiting...")
     await load_cat("lingerie", message)
 
 
 @dp.message_handler(Text(equals="Sleep"))
 async def get_cleareance(message: types.Message):
-    await message.answer("Please waiting...")
     await load_cat("sleep", message)
 
 
