@@ -93,9 +93,6 @@ def parce_data(list_item, list_id):
     return item_card
     # counter += 1
 
-#
-# print(f"Total in {cat_name} {counter} items")
-# return items_list
 
 #
 # if __name__ == "__main__":

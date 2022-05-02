@@ -54,7 +54,8 @@ dict_url["accessories"] = {
         {12:
              ["Fine Fragrance Mist", 'Rollerball']}
 }
-#
+
+
 dict_url["al_brands_we_love"] = {
     "url":["https://api.victoriassecret.com/stacks/v20/?brand=vs&collectionId=5531819d-7df2-4edb-a494-ea06881acf1f&maxSwatches=8&isPersonalized=true&activeCountry=US&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=bcc50df5-13c0-4791-9c80-81d2e279ccd3.34_0&screenWidth=1920&screenHeight=1080"],
     "keywords":
