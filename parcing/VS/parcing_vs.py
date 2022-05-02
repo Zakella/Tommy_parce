@@ -99,8 +99,3 @@ def parce_data(list_item, list_id):
 #     data = get_data("sale")
 #     print(data)
 
-# print(data1)
-# with open("test", "w") as file:
-#     json.dump(data1, file, indent=4, ensure_ascii=False)
-# for it in data:
-#     print(it.get("images"))
