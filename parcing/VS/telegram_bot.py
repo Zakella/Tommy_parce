@@ -1,4 +1,4 @@
-from vs_config import Bot as token
+from config import token
 import time
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher.filters import Text
@@ -13,7 +13,7 @@ pict_domain = "https://www.victoriassecret.com/p/280x373/"
 
 @dp.message_handler(commands="start")
 async def start(message: types.Message):
-    start_buttons = ["Cleareance", "Beauty", "Panties", "Lingerie",
+    start_buttons = ["Sale", "Beauty", "Panties", "Lingerie", "Bras",
                      "Sleep", "Swimsuits", "Sport", "Accessories",
                      "All Brands We love", "Gifts"]
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -23,8 +23,7 @@ async def start(message: types.Message):
 
 async def load_cat(name_cat, message):
     await message.answer("Please waiting...")
-    settings = vs_config.dict_url.get(name_cat)
-    data = parcing_vs.get_data(name_cat, settings.get("url"))
+    data = parcing_vs.get_data(name_cat)
     if not isinstance(data, list):
         await message.answer(data)
         return
@@ -52,9 +51,9 @@ async def load_cat(name_cat, message):
             await message.answer(card)
 
 
-@dp.message_handler(Text(equals="Cleareance"))
+@dp.message_handler(Text(equals="Sale"))
 async def get_cleareance(message: types.Message):
-    await load_cat("cleareance", message)
+    await load_cat("sale", message)
 
 
 @dp.message_handler(Text(equals="Beauty"))
@@ -100,6 +99,13 @@ async def get_al_brands_we_love(message: types.Message):
 @dp.message_handler(Text(equals="Gifts"))
 async def get_gifts(message: types.Message):
     await load_cat("gifts", message)
+
+
+@dp.message_handler(Text(equals="Bras"))
+async def get_gifts(message: types.Message):
+    await load_cat("bras", message)
+
+
 
 
 def main():
