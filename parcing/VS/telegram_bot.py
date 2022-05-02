@@ -27,28 +27,29 @@ async def load_cat(name_cat, message):
     if not isinstance(data, list):
         await message.answer(data)
         return
+    else:
+        for item in data:
 
-    for item in data:
-        title = item.get("name")
-        url = item.get("url")
-        price = item.get("price")
-        min_price = item.get("min_price")
-        images = item.get("images")
-        family = item.get("family")
-        card = f"{hlink(title, url)}\n" \
-               f"{hbold('Family: ')} {family.title()}\n" \
-               f"{hbold('Price: ')} {price}\n" \
-               f"{hbold('Min. price: ')} - {min_price}"
-        album = types.MediaGroup()
-        try:
-            for image in images:
-                album.attach_photo(photo=image)
-            album.attach_photo(photo=item.get("main_image"), caption=card)
-            await message.answer_media_group(media=album)
-            time.sleep(0.8)
+            title = item.get("name")
+            url = item.get("url")
+            price = item.get("price")
+            min_price = item.get("min_price")
+            images = item.get("images")
+            family = item.get("family")
+            card = f"{hlink(title, url)}\n" \
+                   f"{hbold('Family: ')} {family.title()}\n" \
+                   f"{hbold('Price: ')} {price}\n" \
+                   f"{hbold('Min. price: ')} - {min_price}"
+            album = types.MediaGroup()
+            try:
+                for image in images:
+                    album.attach_photo(photo=image)
+                album.attach_photo(photo=item.get("main_image"), caption=card)
+                await message.answer_media_group(media=album)
+                time.sleep(0.8)
 
-        except:
-            await message.answer(card)
+            except:
+                await message.answer(card)
 
 
 @dp.message_handler(Text(equals="Sale"))

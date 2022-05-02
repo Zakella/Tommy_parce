@@ -20,23 +20,26 @@ def get_data(cat_name):
         if response.status_code == 200:
             succes_times += 1
             data = response.json()
-            print(type(data))
             if isinstance(data, dict):
                 stacks = data.get("stacks")
                 for stack in stacks:
                     for item in stack.get("list"):
-                        item_list.append(parce_data(item, categories_id))
+                        result = parce_data(item, categories_id)
+                        if result != None:
+                            item_list.append(result)
                         counter += 1
             if isinstance(data, list):
                 for item in data:
-                    item_list.append(parce_data(item, categories_id))
-                    counter += 1
+                    result = parce_data(item, categories_id)
+                    if result != None:
+                        item_list.append(result)
+            counter += 1
 
     print(f"Total in {cat_name} {counter} items")
     if succes_times == len(url_list["url"]):
         return item_list
     else:
-        return "Ups! Server is gone, try again later!"
+        return "Ups! Server is gone, try again later!\n" + response.text
 
 
 def parce_data(list_item, list_id):
@@ -50,52 +53,65 @@ def parce_data(list_item, list_id):
         item_card["url"] = DOMEN + list_item.get("url")
         item_card["price"] = float(list_item.get("price").replace("$", ""))
         sale_price = list_item.get("salePrice").replace("$", "")
-    item_card["images"] = []
-    if not sale_price:
-        item_card["sale_price"] = 0
-    else:
-        item_card["sale_price"] = float(sale_price)
-    item_card["altPrices"] = list_item.get("altPrices")
-    item_card["min_price"] = item_card["price"] if not item_card["sale_price"] else item_card[
-        "sale_price"]
-    item_card["alt_price1"] = 0
-    item_card["alt_price2"] = 0
-    if item_card["altPrices"] != None:
-        for price in item_card['altPrices']:
-            alt_price = price.split("/$")
+        item_card["images"] = []
+        if not sale_price:
+            item_card["sale_price"] = 0
+        else:
+            item_card["sale_price"] = float(sale_price)
+        item_card["altPrices"] = list_item.get("altPrices")
+        item_card["min_price"] = item_card["price"] if not item_card["sale_price"] else item_card[
+            "sale_price"]
+        item_card["alt_price1"] = 0
+        item_card["alt_price2"] = 0
+        if item_card["altPrices"] != None:
+            for price in item_card['altPrices']:
+                alt_price = price.split("/$")
+                try:
+                    quant_1 = float(alt_price[0][-1])
+                    amount_1 = float(alt_price[1].split()[0].replace(",", ""))
+                    item_card["alt_price1"] = amount_1 / quant_1 if quant_1 != 0 else 0
+                except Exception:
+                    pass
+
             try:
-                quant_1 = float(alt_price[0][-1])
-                amount_1 = float(alt_price[1].split()[0].replace(",", ""))
-                item_card["alt_price1"] = amount_1 / quant_1 if quant_1 != 0 else 0
+                quant_2 = alt_price[-2].replace(",", "")[-1]
+                amount_2 = alt_price[-1]
+                item_card["alt_price2"] = amount_2 / quant_2 if quant_2 != 0 else 0
             except Exception:
                 pass
 
-        try:
-            quant_2 = alt_price[-2].replace(",", "")[-1]
-            amount_2 = alt_price[-1]
-            item_card["alt_price2"] = amount_2 / quant_2 if quant_2 != 0 else 0
-        except Exception:
-            pass
+        item_card["min_price"] = min(
+            filter(None, (item_card["min_price"], item_card["alt_price1"], item_card["alt_price2"])))
 
-    item_card["min_price"] = min(
-        filter(None, (item_card["min_price"], item_card["alt_price1"], item_card["alt_price2"])))
+        main_image = list_item.get("productImages")[0]
+        for image in list_item.get("swatches"):
+            try:
+                if main_image != image.get("productImage"):
+                    item_card["images"].append(PICTDOMEN + image.get("productImage") + ".jpg")
 
-    main_image = list_item.get("productImages")[0]
-    for image in list_item.get("swatches"):
-        try:
-            if main_image != image.get("productImage"):
-                item_card["images"].append(PICTDOMEN + image.get("productImage") + ".jpg")
+            except:
+                item_card["images"].append(PICTDOMEN + list_item.get("productImages")[0] + ".jpg")
 
-        except:
-            item_card["images"].append(PICTDOMEN + list_item.get("productImages")[0] + ".jpg")
+        item_card["main_image"] = PICTDOMEN + main_image + ".jpg"
+        list_id.append(masterStyleId)
+        return item_card
 
-    item_card["main_image"] = PICTDOMEN + main_image + ".jpg"
-    return item_card
+
     # counter += 1
 
 
 #
 # if __name__ == "__main__":
-#     data = get_data("sale")
+#     data = get_data("sport")
 #     print(data)
-
+#     for item in data:
+#         title = item.get("name")
+#         url = item.get("url")
+#         price = item.get("price")
+#         min_price = item.get("min_price")
+#         images = item.get("images")
+#         family = item.get("family")
+#     # for i in data:
+#     #     # print(i.get("masterStyleId"))
+    #     print(i)
+    #
