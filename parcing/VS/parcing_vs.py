@@ -102,7 +102,7 @@ def parce_data(list_item, list_id):
 
 #
 # if __name__ == "__main__":
-#     data = get_data("sport")
+#     data = get_data("sale")
 #     print(data)
 #     for item in data:
 #         title = item.get("name")

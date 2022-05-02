@@ -46,7 +46,7 @@ async def load_cat(name_cat, message):
                     album.attach_photo(photo=image)
                 album.attach_photo(photo=item.get("main_image"), caption=card)
                 await message.answer_media_group(media=album)
-                time.sleep(0.8)
+                time.sleep(1.2)
 
             except:
                 await message.answer(card)
