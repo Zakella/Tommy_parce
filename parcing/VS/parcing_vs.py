@@ -1,6 +1,7 @@
 import requests
 from fake_useragent import UserAgent
 import vs_config
+import json
 
 DOMEN = "https://www.victoriassecret.com/"
 PICTDOMEN = "https://www.victoriassecret.com/p/280x373/"
@@ -36,10 +37,17 @@ def get_data(cat_name):
             counter += 1
 
     print(f"Total in {cat_name} {counter} items")
+
     if succes_times == len(url_list["url"]):
+        with open(cat_name + ".json", "w", encoding=" utf-8") as file:
+            json.dump(item_list, file, indent=4, ensure_ascii=False)
         return item_list
     else:
-        return "Ups! Server is gone, try again later!"
+        try:
+            with open(cat_name+".json") as file:
+                return json.load(file)
+        except:
+            return "Ups! Server is gone, try again later!"
 
 
 def parce_data(list_item, list_id):
@@ -100,18 +108,7 @@ def parce_data(list_item, list_id):
     # counter += 1
 
 
-#
+# #
 # if __name__ == "__main__":
-#     data = get_data("sale")
-#     print(data)
-#     for item in data:
-#         title = item.get("name")
-#         url = item.get("url")
-#         price = item.get("price")
-#         min_price = item.get("min_price")
-#         images = item.get("images")
-#         family = item.get("family")
-#     # for i in data:
-#     #     # print(i.get("masterStyleId"))
-    #     print(i)
-    #
+#     # data = get_data("sale")
+#     # print(data)

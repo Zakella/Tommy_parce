@@ -1,3 +1,6 @@
+import json
+
+import aiogram.utils.exceptions
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from config import token
 import time
@@ -53,10 +56,14 @@ async def load_cat(name_cat, selection , message):
                     await message.answer_media_group(media=album)
                     counter +=1
                     time.sleep(1.2)
-
-
-                except:
+                except aiogram.utils.exceptions.RetryAfter:
+                    await message.answer("Warning! Flood control. Retry after 15 sec")
+                    time.sleep(15) #for flood control
+                    await message.answer_media_group(media=album)
+                except aiogram.utils.exceptions.BadRequest:
                     await message.answer(card)
+
+
         await message.answer(f'I m done! Total {counter} items')
 
 
