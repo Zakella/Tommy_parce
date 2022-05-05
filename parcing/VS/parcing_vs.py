@@ -7,11 +7,15 @@ DOMEN = "https://www.victoriassecret.com/"
 PICTDOMEN = "https://www.victoriassecret.com/p/280x373/"
 
 
-def get_data(cat_name):
+def get_data(cat_name, country):
     headers = {"user-agent": UserAgent().chrome
                }
 
-    url_list = vs_config.dict_url[cat_name]
+    if country == "MD":
+        url_list = vs_config.get_settings_md()[cat_name]
+    elif country == "US":
+        url_list = vs_config.get_settings_us()[cat_name]
+
     categories_id = []
     counter = 0
     item_list = []
@@ -109,6 +113,6 @@ def parce_data(list_item, list_id):
 
 
 # #
-# if __name__ == "__main__":
-#     # data = get_data("sale")
-#     # print(data)
+if __name__ == "__main__":
+    data = get_data("beauty", "MD")
+    print(data)
