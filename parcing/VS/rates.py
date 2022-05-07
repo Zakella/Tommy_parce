@@ -1,45 +1,38 @@
 import requests
 import json
 from bs4 import BeautifulSoup, element
-
-responce = requests.get("http://pki.maib.md/rates/")
-# print(responce.text)
+from datetime import datetime
 
 
-soup = BeautifulSoup(responce.content, "html.parser")
-print()
+def get_exchange_rate(currency):
+    response = requests.get("http://pki.maib.md/rates/")
+    soup = BeautifulSoup(response.content, "html.parser")
+    data = soup.find('pre')
+    list_rates = []
+    add_ref = False
+    for el in data:
 
-data = soup.find('pre')
-# data = soup.find(href=True)
-# print(data)
+        if isinstance(el, element.NavigableString):
+            new_list = []
+            day_date = "/".join(list(map(lambda x: "0" + x if len(x) == 1 else x, el.string.split()[0].split("/"))))
+            h_date = ":".join(list(map(lambda x: "0" + x if len(x) == 1 else x, el.string.split()[1].split(":"))))
+            date_time_obj = datetime.strptime(f"{day_date} {h_date}", '%m/%d/%Y %H:%M')
+            new_list.append(date_time_obj)
+            add_ref = True
+        elif isinstance(el, element.Tag):
+            for ref in el:
+                if add_ref:
+                    new_list.append(f"http://pki.maib.md/rates/{ref}")
+                    list_rates.append(new_list)
+                    add_ref = False
 
-list_rates = {}
+    response = requests.get(sorted(list_rates)[-1][1])
+    currents_data = response.json()
+    cur_dict = {}
+    for el in currents_data:
+        cur_dict[el.get("currencies_name")] = float(el.get("sell"))
 
-for i in data:
-    # tag = i.br
-    # print(tag)
-    # print()
-    print(type(i))
-    if isinstance(i, element.NavigableString):
-        print(i.string.split()[0])
-        # list_rates[]
-    # if not i == "<br/":
-    #     print(i)
-    print(i)
-    # d2 = i.find("br")
-    # print(d2)
+    return cur_dict.get(currency)
 
-    # print(i, type(i))
-    # print(i.attrs.findall("a"))
-
-# root.find_all('pre')
-# for i in root:
-#     print(i)
-#     break
-# print(root)
-# sup = BeautifulSoup.find_all(responce.text, "b")
-# a = responce.text.find("5/6/2022")
+# a = get_exchange_rate("RON")
 # print(a)
-
-# with open("rates", "w", encoding="utf-8") as rates:
-#     json.dump(responce.text, rates, indent=4, ensure_ascii=False)

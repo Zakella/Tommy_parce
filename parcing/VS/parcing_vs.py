@@ -1,7 +1,8 @@
 import requests
 from fake_useragent import UserAgent
-import vs_config
+from vs_config import settings
 import json
+import rates
 
 DOMEN = "https://www.victoriassecret.com/"
 PICTDOMEN = "https://www.victoriassecret.com/p/280x373/"
@@ -10,11 +11,10 @@ PICTDOMEN = "https://www.victoriassecret.com/p/280x373/"
 def get_data(cat_name, country):
     headers = {"user-agent": UserAgent().chrome
                }
+    print(settings.get(country).get("currency"))
+    rate = rates.get_exchange_rate(settings.get(country).get("currency"))
+    url_list = settings.get(country).get(cat_name)
 
-    if country == "MD":
-        url_list = vs_config.get_settings_md()[cat_name]
-    elif country == "US":
-        url_list = vs_config.get_settings_us()[cat_name]
 
     categories_id = []
     counter = 0
@@ -29,13 +29,13 @@ def get_data(cat_name, country):
                 stacks = data.get("stacks")
                 for stack in stacks:
                     for item in stack.get("list"):
-                        result = parce_data(item, categories_id)
+                        result = parce_data(item, categories_id, rate)
                         if result != None:
                             item_list.append(result)
                         counter += 1
             if isinstance(data, list):
                 for item in data:
-                    result = parce_data(item, categories_id)
+                    result = parce_data(item, categories_id, rate)
                     if result != None:
                         item_list.append(result)
             counter += 1
@@ -54,7 +54,7 @@ def get_data(cat_name, country):
             return "Ups! Server is gone, try again later!"
 
 
-def parce_data(list_item, list_id):
+def parce_data(list_item, list_id, rate):
     item_card = {}
     masterStyleId = list_item.get("masterStyleId")
     if not masterStyleId in list_id:
@@ -94,6 +94,7 @@ def parce_data(list_item, list_id):
 
         item_card["min_price"] = min(
             filter(None, (item_card["min_price"], item_card["alt_price1"], item_card["alt_price2"])))
+        item_card["price_mdl"] = int(item_card["min_price"] * rate)
 
         main_image = list_item.get("productImages")[0]
         for image in list_item.get("swatches"):
@@ -112,7 +113,7 @@ def parce_data(list_item, list_id):
     # counter += 1
 
 
-# #
+# # #
 if __name__ == "__main__":
     data = get_data("beauty", "MD")
     print(data)

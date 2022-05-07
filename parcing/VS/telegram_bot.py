@@ -1,5 +1,4 @@
 import json
-
 import aiogram.utils.exceptions
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from config import token
@@ -44,10 +43,13 @@ async def load_cat(country,name_cat, selection, message):
                 min_price = item.get("min_price")
                 images = item.get("images")
                 family = item.get("family")
+                price_mdl = item.get("price_mdl")
                 card = f"{hlink(title, url)}\n" \
                        f"{hbold('Family: ')} {family.title()}\n" \
                        f"{hbold('Price: ')} {price}\n" \
-                       f"{hbold('Min. price: ')} - {min_price}"
+                       f"{hbold('Min. price: ')} - {min_price}\n" \
+                       f"{hbold('MDL: ')} - {price_mdl}"
+
                 album = types.MediaGroup()
                 try:
                     for image in images:
@@ -175,5 +177,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-#
