@@ -1,4 +1,3 @@
-import json
 import aiogram.utils.exceptions
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from config import token
@@ -9,6 +8,7 @@ from aiogram.utils.markdown import hbold, hlink
 import vs_config
 import parcing_vs
 from callback_data import select, country
+import rates
 
 bot = Bot(token=token, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
@@ -25,16 +25,20 @@ async def start(message: types.Message):
     await message.answer("Sale", reply_markup=keyboard)
 
 
-async def load_cat(country,name_cat, selection, message):
-    await message.answer("Please waiting...")
-    data = parcing_vs.get_data(name_cat, country)
+async def load_cat(country, name_cat, selection, message):
+    await message.answer("Please wait...")
+    all_rates = rates.get_exchange_rate()
+    USD = all_rates.get("USD")
+    data = parcing_vs.get_data(name_cat, country, all_rates)
+    symbol = vs_config.settings.get(country).get("symbol")
+    # print(vs_config.settings.get(country))
     counter = 0
     if not isinstance(data, list):
         await message.answer(data)
         return
     else:
         for item in data:
-            if selection < item.get("min_price"):
+            if selection * USD < item.get("price_mdl"):
                 continue
             else:
                 title = item.get("name")
@@ -46,9 +50,9 @@ async def load_cat(country,name_cat, selection, message):
                 price_mdl = item.get("price_mdl")
                 card = f"{hlink(title, url)}\n" \
                        f"{hbold('Family: ')} {family.title()}\n" \
-                       f"{hbold('Price: ')} {price}\n" \
-                       f"{hbold('Min. price: ')} - {min_price}\n" \
-                       f"{hbold('MDL: ')} - {price_mdl}"
+                       f"{hbold('Price: ')} {price} {symbol}\n" \
+                       f"{hbold('Min. price: ')} : {min_price} {symbol}\n" \
+                       f"{hbold('MDL: ')} : {price_mdl}"
 
                 album = types.MediaGroup()
                 try:
@@ -92,10 +96,16 @@ async def create_country_keyboard(name_cat, selection, message):
     if message.text == "All Brands We love":
         message.text = "al_brands_we_love"
 
-
     choise = InlineKeyboardMarkup(row_width=2)
-    choise.insert( InlineKeyboardButton(text="US", callback_data=country.new(value="US", price_value=selection, cat=name_cat)))
-    choise.insert( InlineKeyboardButton(text="MD", callback_data=country.new(value="MD", price_value=selection, cat=name_cat)))
+    choise.insert(
+        InlineKeyboardButton(text="US", callback_data=country.new(value="US", price_value=selection, cat=name_cat)))
+    choise.insert(
+        InlineKeyboardButton(text="MD", callback_data=country.new(value="MD", price_value=selection, cat=name_cat)))
+    choise.insert(
+        InlineKeyboardButton(text="RO", callback_data=country.new(value="RO", price_value=selection, cat=name_cat)))
+    choise.insert(
+        InlineKeyboardButton(text="IT", callback_data=country.new(value="IT", price_value=selection, cat=name_cat)))
+
     await message.answer("Сhoose active country", reply_markup=choise)
 
 
@@ -103,9 +113,7 @@ async def create_country_keyboard(name_cat, selection, message):
 async def process_selection(call: CallbackQuery):
     await call.answer(cache_time=60)
     data = call.data.split(":")
-    print(data)
-    await  load_cat(data[1], data[3],  float(data[2]), call.message)
-
+    await  load_cat(data[1], data[3], float(data[2]), call.message)
 
 
 @dp.callback_query_handler(text_contains="selection")

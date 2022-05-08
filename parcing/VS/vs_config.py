@@ -1,6 +1,7 @@
 settings = {
     "US":
         {"currency": "USD",
+         "symbol": "$",
          "beauty": {
              "url":
                  [
@@ -64,6 +65,7 @@ settings = {
          },
     "MD":
         {"currency": "USD",
+         "symbol": "$",
          "beauty": {
              "url":
                  [
@@ -123,6 +125,130 @@ settings = {
                  "https://api.victoriassecret.com/stacks/v21/stack?collectionId=c42ffd82-d7c3-4e68-94a1-d97b39f40811&stackId=09f024f8-f397-48b9-bc77-14f7863de15e&maxSwatches=8&isPersonalized=true&aid=3e66bc9d-9faa-46a7-a306-3065f792444d&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&deviceType=&perzConsent=true&platform=web&platformType=&screenWidth=1920&screenHeight=1080&tntId=3e66bc9d-9faa-46a7-a306-3065f792444d.34_0&orderBy=REC&offset=360&limit=180&activeCountry=MD"],
 
          },
-         }
+         },
+    "RO":
+        {"currency": "RON",
+         "symbol": "RON",
+         "beauty": {
+             "url":
+                 [
+                     f"https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=d15948c4-a78f-4dab-bd2a-cdc6564ffc34&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+
+         },
+         "panties": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=6eb74c5f-3b70-42d3-859a-f33d92496bd0&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+
+         },
+         "lingerie": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=d88f944c-551a-4760-9883-c44f08fc73e2&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+
+         },
+         "sleep": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=57d7cdfc-05ee-49d7-a493-e8bcb933001f&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "swimsuits": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=f0c9aaa9-69e7-4e6f-92b8-7b976397f594&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "sport": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=156a1c4e-302f-4dc3-89ae-2204511f1ec7&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "accessories": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=5f1a19d9-13a5-4db9-b531-c8d0bb96f38c&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "al_brands_we_love": {
+             "url":
+                 [],
+         },
+         "gifts": {
+             "url":
+                 [],
+         },
+         "bras": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=a601f85e-5f59-4fc7-adb6-c3868d07fbf6&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "sale": {
+             "url": [
+                 "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=c42ffd82-d7c3-4e68-94a1-d97b39f40811&maxSwatches=8&isPersonalized=true&activeCountry=RO&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618",
+                 "https://api.victoriassecret.com/stacks/v21/stack?collectionId=c42ffd82-d7c3-4e68-94a1-d97b39f40811&stackId=09f024f8-f397-48b9-bc77-14f7863de15e&maxSwatches=8&isPersonalized=true&aid=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&deviceType=&perzConsent=true&platform=web&platformType=&screenWidth=1098&screenHeight=618&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&orderBy=REC&offset=180&limit=180&activeCountry=RO",
+                 "https://api.victoriassecret.com/stacks/v21/stack?collectionId=c42ffd82-d7c3-4e68-94a1-d97b39f40811&stackId=09f024f8-f397-48b9-bc77-14f7863de15e&maxSwatches=8&isPersonalized=true&aid=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&deviceType=&perzConsent=true&platform=web&platformType=&screenWidth=1098&screenHeight=618&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&orderBy=REC&offset=360&limit=180&activeCountry=RO"],
+
+         },
+         },
+    "IT":
+        {"currency": "EUR",
+         "symbol": "€",
+         "beauty": {
+             "url":
+                 [
+                     f"https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=9df09d6f-c397-46d7-95dc-d6335cfae1dd&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+
+         },
+         "panties": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=6eb74c5f-3b70-42d3-859a-f33d92496bd0&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+
+         },
+         "lingerie": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=d88f944c-551a-4760-9883-c44f08fc73e2&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+
+         },
+         "sleep": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=57d7cdfc-05ee-49d7-a493-e8bcb933001f&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "swimsuits": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=f0c9aaa9-69e7-4e6f-92b8-7b976397f594&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "sport": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=156a1c4e-302f-4dc3-89ae-2204511f1ec7&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "accessories": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=5f1a19d9-13a5-4db9-b531-c8d0bb96f38c&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "al_brands_we_love": {
+             "url":
+                 [],
+         },
+         "gifts": {
+             "url":
+                 [],
+         },
+         "bras": {
+             "url":
+                 [
+                     "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=a601f85e-5f59-4fc7-adb6-c3868d07fbf6&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618"],
+         },
+         "sale": {
+             "url": [
+                 "https://api.victoriassecret.com/stacks/v21/?brand=vs&collectionId=c42ffd82-d7c3-4e68-94a1-d97b39f40811&maxSwatches=8&isPersonalized=true&activeCountry=IT&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&platform=web&deviceType=&platformType=&perzConsent=true&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&screenWidth=1098&screenHeight=618",
+                 "https://api.victoriassecret.com/stacks/v21/stack?collectionId=c42ffd82-d7c3-4e68-94a1-d97b39f40811&stackId=09f024f8-f397-48b9-bc77-14f7863de15e&maxSwatches=8&isPersonalized=true&aid=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&deviceType=&perzConsent=true&platform=web&platformType=&screenWidth=1098&screenHeight=618&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&orderBy=REC&offset=180&limit=180&activeCountry=IT",
+                 "https://api.victoriassecret.com/stacks/v21/stack?collectionId=c42ffd82-d7c3-4e68-94a1-d97b39f40811&stackId=09f024f8-f397-48b9-bc77-14f7863de15e&maxSwatches=8&isPersonalized=true&aid=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73&cid=0a6fb046977025716e9e20e8a9c60cf9090cfd4c788cf19f09bb8939397f083d&deviceType=&perzConsent=true&platform=web&platformType=&screenWidth=1098&screenHeight=618&tntId=1dfdd5ed-bf93-4461-8c6a-d04cc2647f73.34_0&orderBy=REC&offset=360&limit=180&activeCountry=IT"],
+
+         },
+         },
 
 }

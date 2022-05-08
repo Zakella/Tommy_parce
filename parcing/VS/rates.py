@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup, element
 from datetime import datetime
 
 
-def get_exchange_rate(currency):
+def get_exchange_rate():
     response = requests.get("http://pki.maib.md/rates/")
     soup = BeautifulSoup(response.content, "html.parser")
     data = soup.find('pre')
@@ -32,7 +32,7 @@ def get_exchange_rate(currency):
     for el in currents_data:
         cur_dict[el.get("currencies_name")] = float(el.get("sell"))
 
-    return cur_dict.get(currency)
+    return cur_dict
 
 # a = get_exchange_rate("RON")
 # print(a)
