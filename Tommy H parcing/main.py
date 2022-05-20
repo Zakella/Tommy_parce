@@ -3,6 +3,7 @@ import json
 from bs4 import BeautifulSoup
 
 
+
 def parce():
     with open("headers.json") as file:
         headers = json.load(file)
@@ -12,7 +13,7 @@ def parce():
     # response = requests.session().get(url=url, headers=headers)
     # with open("index.html", "w") as file:
     #     file.write(response.text)
-    #
+
     # print(response.text)
 
     with open("index.html") as file:
